@@ -6,10 +6,11 @@ resource "github_membership" "bot" {
 
 // Create master GitHub homework repositories
 resource "github_repository" "hw" {
-  for_each = local.hws
+  for_each    = local.hws
   name        = each.key
   description = "${each.key} stubbed template"
-  visibility = "private"
+  visibility  = "private"
+  is_template = true
 }
 
 
@@ -27,7 +28,7 @@ resource "github_team_membership" "some_team_membership" {
 }
 
 resource "github_team_repository" "bot" {
-  for_each = local.hws
+  for_each   = local.hws
   team_id    = github_team.bot.id
   repository = each.key
   permission = "push"
