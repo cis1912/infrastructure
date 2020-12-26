@@ -19,8 +19,8 @@ First, make sure all of the hws are unpublished in `terraform/main.tf` and that 
 
 Make sure students know that their homework repos will be deleted at the end of the semester. Suggest using a private repo if they want to save any work from the course.
 
-Run the following to delete all student repos and teams:
+Make sure all homework assignments are marked as unpublished in `terraform/main.tf` and that your students variable is an empty set then run:
 
 ```bash
-terraform destroy --target module.hws --target github_team.student
+terraform apply
 ```
