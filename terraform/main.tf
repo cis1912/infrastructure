@@ -7,4 +7,5 @@ locals {
     "hw4",
     "final_project",
   ])
+  bot_user = "cis188bot"
 }
