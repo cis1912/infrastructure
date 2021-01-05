@@ -7,7 +7,7 @@ resource "kubernetes_namespace" "ns" {
 
 resource "kubernetes_role_binding" "rb" {
   metadata {
-    name      = "cis188-student-rolebinding"
+    name      = var.pennkey
     namespace = var.pennkey
   }
   role_ref {
