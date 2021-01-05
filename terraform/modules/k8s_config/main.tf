@@ -13,7 +13,7 @@ resource "kubernetes_role_binding" "rb" {
   role_ref {
     api_group = "rbac.authorization.k8s.io"
     kind      = "ClusterRole"
-    name      = var.cluster-role-name
+    name      = "admin"
   }
   subject {
     kind      = "User"
