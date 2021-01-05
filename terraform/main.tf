@@ -16,6 +16,6 @@ locals {
       }
     ]
   ])
-  bot_user = "cis188bot"
+  bot_user         = "cis188bot"
   k8s_cluster_name = "cis188"
 }

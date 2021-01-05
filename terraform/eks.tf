@@ -57,7 +57,7 @@ resource "helm_release" "cilium" {
   version    = "1.9.1"
   namespace  = "kube-system"
 
-   values = [file("helm/cilium.yaml")] 
+  values = [file("helm/cilium.yaml")]
 }
 
 // TODO: other things like traefik
