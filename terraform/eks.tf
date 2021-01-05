@@ -59,3 +59,5 @@ resource "helm_release" "cilium" {
 
    values = [file("helm/cilium.yaml")] 
 }
+
+// TODO: other things like traefik
