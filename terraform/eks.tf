@@ -28,6 +28,7 @@ module "eks" {
     created-by = "terraform"
   }
 }
+// TODO: see if we can local-exec and kill the default CNI
 
 data "aws_eks_cluster" "eks" {
   name = module.eks.cluster_id
@@ -60,4 +61,12 @@ resource "helm_release" "cilium" {
   values = [file("helm/cilium.yaml")]
 }
 
-// TODO: other things like traefik
+resource "helm_release" "traefik" {
+  name       = "traefik"
+  repository = "https://charts.helm.sh/stable"
+  chart      = "traefik"
+  version    = "1.87.2"
+  namespace  = "kube-system"
+
+  values = [file("helm/traefik.yaml")]
+}
