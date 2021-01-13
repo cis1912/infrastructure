@@ -1,4 +1,4 @@
 variable "pennkey" {
-  type = string
+  type        = string
   description = "Pennkey of student"
 }

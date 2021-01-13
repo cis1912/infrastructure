@@ -10,7 +10,7 @@ resource "aws_iam_user" "user" {
 // Policy to allow user to assume any role
 data "aws_iam_policy_document" "assume-role-policy" {
   statement {
-    actions = ["sts:AssumeRole"]
+    actions   = ["sts:AssumeRole"]
     resources = ["*"]
   }
 }
@@ -62,7 +62,6 @@ data "aws_iam_policy_document" "manage-user" {
 
 resource "aws_iam_role_policy" "manage-user" {
   name   = "manage-user"
-  role
-  user   = aws_iam_role.role.name
+  role   = aws_iam_role.role.name
   policy = data.aws_iam_policy_document.manage-user.json
 }

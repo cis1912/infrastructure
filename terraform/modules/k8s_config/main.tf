@@ -1,7 +1,7 @@
 // Create namespace
 resource "kubernetes_namespace" "ns" {
   metadata {
-    name var.pennkey
+    name = var.pennkey
   }
 }
 
