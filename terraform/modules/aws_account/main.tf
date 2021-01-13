@@ -45,3 +45,24 @@ resource "aws_iam_role" "role" {
   }
 }
 
+// Allow role to create an access key for the user
+data "aws_iam_policy_document" "manage-user" {
+  statement {
+    actions = [
+      "iam:CreateAccessKey",
+      "iam:DeleteAccessKey",
+      "iam:GetAccessKeyLastUsed",
+      "iam:GetUser",
+      "iam:ListAccessKeys",
+      "iam:UpdateAccessKey"
+    ]
+    resources = [aws_iam_user.user.arn]
+  }
+}
+
+resource "aws_iam_role_policy" "manage-user" {
+  name   = "manage-user"
+  role
+  user   = aws_iam_role.role.name
+  policy = data.aws_iam_policy_document.manage-user.json
+}
