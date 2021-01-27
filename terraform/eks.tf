@@ -9,7 +9,7 @@ module "eks" {
   enable_irsa      = true
   map_roles = [
     for student in var.students : {
-      rolearn = modeule.aws_accounts[student].role-arn, username = student, groups = []
+      rolearn = module.aws_accounts[student].role-arn, username = student, groups = []
     }
   ]
   worker_groups_launch_template = [
