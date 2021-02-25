@@ -8,7 +8,7 @@ resource "helm_release" "cert-manager" {
   name       = "cert-manager"
   repository = "https://charts.jetstack.io"
   chart      = "cert-manager"
-  version    = "1.1.0"
+  version    = "v1.2.0"
   namespace  = kubernetes_namespace.cert-manager.metadata[0].name
   // This is set to ensure that cert-manager is working before the CRs are applied
   atomic = true
@@ -29,7 +29,7 @@ resource "helm_release" "clusterissuer" {
   repository = "https://helm.pennlabs.org"
   chart      = "helm-wrapper"
   version    = "0.1.0"
-  values     = [file("cert-manager/clusterissuer.yaml")]
+  values     = [file("cert-manager-files/clusterissuer.yaml")]
 
   depends_on = [
     time_sleep.cert-manager-cr
