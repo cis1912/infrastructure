@@ -4,7 +4,6 @@ provider "aws" {
 
 provider "helm" {
   kubernetes {
-    load_config_file       = false
     host                   = data.aws_eks_cluster.eks.endpoint
     cluster_ca_certificate = base64decode(data.aws_eks_cluster.eks.certificate_authority.0.data)
     token                  = data.aws_eks_cluster_auth.eks.token
@@ -30,7 +29,7 @@ terraform {
     }
     helm = {
       source  = "hashicorp/helm"
-      version = "~> 1.3"
+      version = "~> 2.0"
     }
     kubernetes = {
       source  = "hashicorp/kubernetes"
