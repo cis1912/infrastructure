@@ -8,7 +8,7 @@ resource "kubernetes_namespace" "ns" {
 resource "kubernetes_role_binding" "rb" {
   metadata {
     name      = var.pennkey
-    namespace = var.pennkey
+    namespace = kubernetes_namespace.ns.metadata[0].name
   }
   role_ref {
     api_group = "rbac.authorization.k8s.io"
