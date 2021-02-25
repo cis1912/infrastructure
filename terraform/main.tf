@@ -18,4 +18,8 @@ locals {
   ])
   bot_user         = "cis188bot"
   k8s_cluster_name = "cis188"
+  instructors = toset([
+    "armaan",
+    "peyton",
+  ])
 }

@@ -12,6 +12,11 @@ module "eks" {
       rolearn = module.aws_accounts[student].role-arn, username = student, groups = []
     }
   ]
+  map_users = [
+    for instructor in local.instructors : {
+      userarn = aws_iam_user.instructors[instructor].arn, username = instructor, groups = ["system:masters"]
+    }
+  ]
   worker_groups_launch_template = [
     {
       name                    = "spot-1"
@@ -69,4 +74,11 @@ resource "helm_release" "traefik" {
   namespace  = "kube-system"
 
   values = [file("helm/traefik.yaml")]
+}
+
+data "aws_iam_policy_document" "view-k8s" {
+  statement {
+    actions   = ["eks:DescribeCluster"]
+    resources = [module.eks.cluster_arn]
+  }
 }
