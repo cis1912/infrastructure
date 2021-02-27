@@ -22,6 +22,12 @@ resource "aws_iam_user_policy" "policy" {
   policy = data.aws_iam_policy_document.assume-role-policy.json
 }
 
+resource "aws_iam_user_policy" "describe-cluster" {
+  name   = "eks"
+  user   = aws_iam_user.user.name
+  policy = var.view_cluster
+}
+
 // Policy to allow iam user of same pennkey to assume role
 data "aws_iam_policy_document" "allow-user-assume-role" {
   statement {
