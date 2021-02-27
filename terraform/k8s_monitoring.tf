@@ -22,4 +22,19 @@ resource "helm_release" "grafana" {
 
   values = [file("helm/grafana.yaml")]
 }
-// TODO: create k8s secret
+
+resource "random_password" "grafana-password" {
+  length  = 64
+  special = false
+}
+
+resource "kubernetes_secret" "grafana" {
+  metadata {
+    name = "grafana"
+  }
+
+  data = {
+    ADMIN_USER     = "admin"
+    ADMIN_PASSWORD = random_password.grafana-password.result
+  }
+}
