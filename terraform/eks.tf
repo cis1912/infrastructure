@@ -26,6 +26,7 @@ module "eks" {
       asg_max_size         = 2
       asg_desired_capacity = 2
       kubelet_extra_args   = "--node-labels=node.kubernetes.io/lifecycle=spot"
+      bootstrap_extra_args = "--use-max-pods false"
       public_ip            = true
     },
   ]
@@ -54,16 +55,16 @@ resource "helm_release" "aws-node-termination-handler" {
   values = [file("helm/aws-node-termination-handler.yaml")]
 }
 
-// Cilium to replace the default ENI
-// https://docs.cilium.io/en/v1.9/gettingstarted/k8s-install-eks/
-resource "helm_release" "cilium" {
-  name       = "cilium"
-  repository = "https://helm.cilium.io"
-  chart      = "cilium"
-  version    = "1.9.1"
+// Weave to replace the default ENI
+// https://medium.com/@swazza85/dealing-with-pod-density-limitations-on-eks-worker-nodes-137a12c8b218
+resource "helm_release" "weave" {
+  name       = "weave"
+  repository = "https://helm.pennlabs.org"
+  chart      = "helm-wrapper"
+  version    = "0.1.0"
   namespace  = "kube-system"
 
-  values = [file("helm/cilium.yaml")]
+  values = [file("helm/weave.yaml")]
 }
 
 resource "helm_release" "traefik" {
