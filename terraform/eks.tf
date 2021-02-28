@@ -83,3 +83,47 @@ data "aws_iam_policy_document" "view-k8s" {
     resources = [module.eks.cluster_arn]
   }
 }
+
+resource "helm_release" "registry-creds" {
+  name       = "registry-creds"
+  repository = "https://helm.pennlabs.org"
+  chart      = "helm-wrapper"
+  version    = "0.1.0"
+
+  values = [file("helm/registry-creds.yaml")]
+}
+
+resource "kubernetes_secret" "cluster-pull-secret" {
+  metadata {
+    name      = "registry-creds-secret"
+    namespace = "kube-system"
+  }
+
+  data = {
+    ".dockerconfigjson" = <<DOCKER
+{
+  "auths": {
+    "https://docker.pkg.github.com": {
+      "auth": "${base64encode("cis188bot:${var.image_pull_pat}")}"
+    }
+  }
+}
+DOCKER
+  }
+
+  type = "kubernetes.io/dockerconfigjson"
+}
+
+resource "helm_release" "cluster-pull-secret" {
+  name       = "cluster-pull-secret"
+  repository = "https://helm.pennlabs.org"
+  chart      = "helm-wrapper"
+  version    = "0.1.0"
+  namespace  = "kube-system"
+
+  values = [file("helm/cluster-pull-secret.yaml")]
+  depends_on = [
+    helm_release.registry-creds,
+    kubernetes_secret.cluster-pull-secret
+  ]
+}
