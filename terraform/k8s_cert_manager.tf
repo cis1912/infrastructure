@@ -16,6 +16,18 @@ resource "helm_release" "cert-manager" {
     name  = "installCRDs"
     value = true
   }
+
+  // Run the webhook in hostNetwork mode so that the API Server can access it
+  // https://github.com/jetstack/cert-manager/blob/95f8d53e19b5dcec1db2d28a2af894ed22ed94db/deploy/charts/cert-manager/values.yaml#L291
+  set {
+    name  = "webhook.hostNetwork"
+    value = true
+  }
+
+  set {
+    name  = "webhook.securePort"
+    value = 10251
+  }
 }
 
 resource "time_sleep" "cert-manager-cr" {
