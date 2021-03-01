@@ -34,7 +34,10 @@ resource "kubernetes_secret" "grafana" {
   }
 
   data = {
-    ADMIN_USER     = "admin"
-    ADMIN_PASSWORD = random_password.grafana-password.result
+    ADMIN_USER                   = "admin"
+    ADMIN_PASSWORD               = random_password.grafana-password.result
+    GF_AUTH_GITHUB_CLIENT_ID     = var.GF_GH_CLIENT_ID
+    GF_AUTH_GITHUB_CLIENT_SECRET = var.GF_GH_CLIENT_SECRET
+
   }
 }

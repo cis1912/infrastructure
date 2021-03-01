@@ -3,7 +3,7 @@ ingress:
   hosts:
     - grafana.cis188.org
   tls:
-    - secretName: pennlabs-org-tls
+    - secretName: grafana-cis188-org-tls
       hosts:
         - grafana.cis188.org
 
