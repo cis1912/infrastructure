@@ -1,3 +1,5 @@
+data "aws_caller_identity" "current" {}
+
 // User
 resource "aws_iam_user" "user" {
   name = var.pennkey
@@ -11,7 +13,7 @@ resource "aws_iam_user" "user" {
 data "aws_iam_policy_document" "assume-role-policy" {
   statement {
     actions   = ["sts:AssumeRole"]
-    resources = ["*"]
+    resources = [aws_iam_role.role.arn]
   }
 }
 
@@ -36,6 +38,14 @@ data "aws_iam_policy_document" "allow-user-assume-role" {
     principals {
       type        = "AWS"
       identifiers = [aws_iam_user.user.arn]
+    }
+  }
+  statement {
+    actions = ["sts:AssumeRoleWithSAML"]
+
+    principals {
+      type        = "Federated"
+      identifiers = ["arn:aws:iam::${data.aws_caller_identity.current.id}:saml-provider/PennWebLogin"]
     }
   }
 }
