@@ -49,12 +49,25 @@ resource "helm_release" "clusterissuer" {
 }
 
 resource "helm_release" "certs" {
-  for_each   = setunion(var.students, toset(["grafana"]))
+  for_each   = var.students
   name       = "cert-${each.key}"
   repository = "https://helm.pennlabs.org"
   chart      = "helm-wrapper"
   version    = "0.1.0"
+  namespace  = each.key
   values     = [templatefile("cert-manager-files/cert.yaml", { NAME = each.key })]
+
+  depends_on = [
+    time_sleep.cert-manager-cr
+  ]
+}
+
+resource "helm_release" "cert-grafana" {
+  name       = "cert-grafana"
+  repository = "https://helm.pennlabs.org"
+  chart      = "helm-wrapper"
+  version    = "0.1.0"
+  values     = [templatefile("cert-manager-files/cert.yaml", { NAME = "grafana" })]
 
   depends_on = [
     time_sleep.cert-manager-cr
