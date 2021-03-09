@@ -1,7 +1,7 @@
 // Add bot user to organization
 resource "github_membership" "bot" {
   username = local.bot_user
-  role     = "member"
+  role     = "admin"
 }
 
 // Create master GitHub homework repositories

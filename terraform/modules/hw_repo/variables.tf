@@ -1,24 +1,24 @@
 variable "pennkey" {
-  type = string
+  type        = string
   description = "Pennkey of student"
 }
 
 variable "hw" {
-  type = string
+  type        = string
   description = "Homework to create repo of (Ex. hw0)."
 }
 
 variable "team-id" {
-  type = string
+  type        = string
   description = "ID of the team the student belongs to."
 }
 
 variable "bot-team-id" {
-  type = string
+  type        = string
   description = "ID of the CIS 188 bot team."
 }
 
 variable "published" {
-  type = bool
+  type        = bool
   description = "Should this homework be published?"
 }

@@ -1,9 +1,9 @@
 locals {
   // Name of the homework mapped to published status
   published = {
-    hw0           = false
-    hw1           = false
-    hw2           = false
+    hw0           = true
+    hw1           = true
+    hw2           = true
     hw3           = false
     hw4           = false
     final_project = false
@@ -16,5 +16,10 @@ locals {
       }
     ]
   ])
-  bot_user = "cis188bot"
+  bot_user         = "cis188bot"
+  k8s_cluster_name = "cis188"
+  instructors = toset([
+    "armaan",
+    "peyton",
+  ])
 }
