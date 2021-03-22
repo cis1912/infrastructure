@@ -103,7 +103,7 @@ resource "kubernetes_secret" "cluster-pull-secret" {
     ".dockerconfigjson" = <<DOCKER
 {
   "auths": {
-    "https://docker.pkg.github.com": {
+    "https://ghcr.io": {
       "auth": "${base64encode("cis188bot:${var.image_pull_pat}")}"
     }
   }
