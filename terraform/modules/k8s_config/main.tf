@@ -25,7 +25,7 @@ resource "kubernetes_role_binding" "rb" {
 // Restrict number of pods
 resource "kubernetes_resource_quota" "pod-limit" {
   metadata {
-    name = "pod-limit"
+    name      = "pod-limit"
     namespace = kubernetes_namespace.ns.metadata[0].name
   }
   spec {
