@@ -5,7 +5,7 @@ locals {
     hw1           = true
     hw2           = true
     hw3           = true
-    hw4           = false
+    hw4           = true
     final_project = false
   }
   // Create a list of objects representing all homework repos to be (eventually) created. 
