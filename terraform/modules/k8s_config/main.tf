@@ -32,6 +32,5 @@ resource "kubernetes_resource_quota" "pod-limit" {
     hard = {
       pods = 10
     }
-    scopes = ["BestEffort"]
   }
 }
