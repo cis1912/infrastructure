@@ -13,7 +13,7 @@ resource "github_team_repository" "hw" {
   count      = var.published ? 1 : 0
   team_id    = var.team-id
   repository = github_repository.hw[0].name
-  permission = "push"
+  permission = var.hw != "hw4" ? "push" : "admin"
 }
 
 resource "github_team_repository" "bot" {
