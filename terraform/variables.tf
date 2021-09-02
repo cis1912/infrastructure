@@ -1,6 +1,16 @@
 variable "students" {
-  type        = set(string)
-  description = "Student pennkeys"
+  type        = map
+  description = "Map of student pennkeys to github usernames"
+}
+
+variable "tas" {
+  type        = map
+  description = "Map of TA pennkeys to github usernames"
+}
+
+variable "instructors" {
+  type        = map
+  description = "Map of instructor pennkeys to github usernames"
 }
 
 variable "image_pull_pat" {
