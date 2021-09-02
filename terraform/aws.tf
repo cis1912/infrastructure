@@ -1,6 +1,6 @@
-// Configure all student aws accounts
+// Configure all aws accounts
 module "aws_accounts" {
-  for_each     = var.students
+  for_each     = local.users
   source       = "./modules/aws_account"
   pennkey      = each.key
   view_cluster = data.aws_iam_policy_document.view-k8s.json

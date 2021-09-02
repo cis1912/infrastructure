@@ -49,7 +49,7 @@ resource "helm_release" "clusterissuer" {
 }
 
 resource "helm_release" "certs" {
-  for_each   = var.students
+  for_each   = local.users
   name       = "cert-${each.key}"
   repository = "https://helm.pennlabs.org"
   chart      = "helm-wrapper"

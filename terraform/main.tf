@@ -11,15 +11,12 @@ locals {
   // Create a list of objects representing all homework repos to be (eventually) created. 
   hws = flatten([
     for hw, published in local.published : [
-      for student in var.students : {
-        hw = hw, student = student, published = published
+      for user, _ in local.users : {
+        hw = hw, student = user, published = published
       }
     ]
   ])
   bot_user         = "cis188bot"
   k8s_cluster_name = "cis188"
-  instructors = toset([
-    "armaan",
-    "peyton",
-  ])
+  users = merge(var.students, var.instructors, var.tas)
 }

@@ -1,10 +1,23 @@
-// Student teams
-resource "github_team" "student" {
-  for_each = var.students
+// Teams
+resource "github_team" "teams" {
+  for_each = local.users
   name     = each.key
   privacy  = "secret"
 }
 
+resource "github_team_membership" "team_membership" {
+  for_each = local.users
+  team_id  = github_team.teams[each.key].id
+  username = each.value
+  role     = "member"
+}
+
+// Student access
+resource "github_membership" "org_membership" {
+  for_each = var.students
+  username = each.value
+  role     = "member"
+}
 
 // HWs
 module "hws" {
@@ -14,7 +27,7 @@ module "hws" {
   source      = "./modules/hw_repo"
   hw          = each.value.hw
   pennkey     = each.value.student
-  team-id     = github_team.student[each.value.student].id
+  team-id     = github_team.teams[each.value.student].id
   bot-team-id = github_team.bot.id
   published   = each.value.published
 }
