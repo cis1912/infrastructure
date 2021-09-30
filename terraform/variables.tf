@@ -1,15 +1,15 @@
 variable "students" {
-  type        = map
+  type        = map(any)
   description = "Map of student pennkeys to github usernames"
 }
 
 variable "tas" {
-  type        = map
+  type        = map(any)
   description = "Map of TA pennkeys to github usernames"
 }
 
 variable "instructors" {
-  type        = map
+  type        = map(any)
   description = "Map of instructor pennkeys to github usernames"
 }
 
