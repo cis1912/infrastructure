@@ -11,12 +11,12 @@ module "eks" {
     for student, _ in var.students : {
       rolearn = module.aws_accounts[student].role-arn, username = student, groups = []
     }
-  ],
-  [
-    for user, _ in merge(var.instructors, var.tas) : {
-      rolearn = module.aws_accounts[user].role-arn, username = user, groups = ["system:masters"]
-    }
-  ]
+    ],
+    [
+      for user, _ in merge(var.instructors, var.tas) : {
+        rolearn = module.aws_accounts[user].role-arn, username = user, groups = ["system:masters"]
+      }
+    ]
   )
   worker_groups_launch_template = [
     {
