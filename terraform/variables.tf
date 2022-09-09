@@ -1,23 +1,6 @@
 variable "students" {
   type        = map(any)
   description = "Map of student pennkeys to github usernames"
-  default = {
-    "anniwang" = "anniewang408"
-    "bjin1618" = "belindajin"
-    "jasonhom" = "homjason"
-    "yuanb"    = "yuanb01"
-    "orestis"  = "Orescout"
-    "lohpaul9" = "lohpaul9"
-    "hojack"   = "jhourigan8"
-    "edgoze"   = "Edgoze"
-    "arushiag" = "arushiag1"
-    "minseokk" = "minskim0327"
-    "mafallon" = "mattf196"
-    "karlei"   = "karleikongsiri"
-    "kevlamb"  = "kev-lamb"
-    "choxner"  = "choxner"
-    "skcheung" = "skylercheung"
-  }
 }
 
 variable "tas" {
