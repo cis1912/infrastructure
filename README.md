@@ -6,8 +6,15 @@ This repo contains the underlying infrastructure of CIS 188. Feel free to poke a
 
 First, make sure all of the hws are unpublished in `terraform/main.tf` and that you have set the `students` variable (Most likely by using the `TF_VAR_students` environment variable in the form `TF_VAR_students='["pennkey1","pennkey2"]'`).
 
-1. Run `terraform apply` within the `terraform folder. This will create all the course infrastructure needed.
+1. Run `terraform apply` within the `terraform` folder. This will create all the course infrastructure needed.
 2. On GitHub, manually invite students to the team named after their pennkey.
+
+NOTE: Running `terraform apply` will ask for the following variables:
+- `GF_GH_CLIENT_ID`
+- `GF_GH_CLIENT_SECRET` 
+- `image_pull_pat`
+- `instructors`
+They are provided by a `terraform.tfvars` file, and should be updated on a semester basis.
 
 ## Releasing a homework assignment
 
