@@ -6,18 +6,11 @@ variable "students" {
 variable "tas" {
   type        = map(any)
   description = "Map of TA pennkeys to github usernames"
-  default = {
-    "joyliu" = "joyliu-q"
-  }
 }
 
 variable "instructors" {
   type        = map(any)
   description = "Map of instructor pennkeys to github usernames"
-  default = {
-    "cphalen" = "cphalen"
-    "grohan"  = "rohangpta"
-  }
 }
 
 variable "image_pull_pat" {
