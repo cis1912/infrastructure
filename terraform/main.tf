@@ -18,12 +18,5 @@ locals {
   ])
   bot_user         = "cis188bot"
   k8s_cluster_name = "cis188"
-  tas = {
-    "joyliu" = "joyliu-q"
-  }
-  instructors = {
-    "cphalen" = "cphalen"
-    "grohan"  = "rohangpta"
-  }
-  users = merge(var.students, var.instructors, var.tas)
+  users            = merge(var.students, var.instructors, var.tas)
 }
