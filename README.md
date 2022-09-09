@@ -15,6 +15,7 @@ NOTE: Running `terraform apply` will ask for the following variables:
 - `image_pull_pat`
 - `instructors`
 They are provided by a `terraform.tfvars` file, and should be updated on a semester basis.
+
 ## Releasing a homework assignment
 
 1. Make sure any changes that need to be made to the homework are finalized.
