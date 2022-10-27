@@ -3,8 +3,8 @@ locals {
   published = {
     hw0           = true
     hw1           = true
-    hw2           = false
-    hw3           = false
+    hw2           = true
+    hw3           = true
     hw4           = false
     final_project = false
   }
