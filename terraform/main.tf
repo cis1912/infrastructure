@@ -16,7 +16,7 @@ locals {
       }
     ]
   ])
-  bot_user         = "cis188bot"
-  k8s_cluster_name = "cis188"
+  bot_user         = "cis1880bot"
+  k8s_cluster_name = "cis1880"
   users            = merge(var.students, var.instructors, var.tas)
 }

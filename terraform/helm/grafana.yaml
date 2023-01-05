@@ -1,11 +1,11 @@
 ingress:
   enabled: true
   hosts:
-    - grafana.cis188.org
+    - grafana.cis1880.org
   tls:
-    - secretName: grafana-cis188-org-tls
+    - secretName: grafana-cis1880-org-tls
       hosts:
-        - grafana.cis188.org
+        - grafana.cis1880.org
 
 admin:
   existingSecret: grafana
@@ -57,7 +57,7 @@ datasources:
 
 grafana.ini:
   server:
-    domain: "grafana.cis188.org"
+    domain: "grafana.cis1880.org"
     root_url: "https://%(domain)s/"
   auth.github:
     enabled: true
@@ -66,6 +66,6 @@ grafana.ini:
     token_url: https://github.com/login/oauth/access_token
     api_url: https://api.github.com/user
     allow_sign_up: true
-    allowed_organizations: cis188
+    allowed_organizations: cis1880
 
 envFromSecret: "grafana"
