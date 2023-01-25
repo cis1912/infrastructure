@@ -4,7 +4,7 @@ resource "github_repository" "hw" {
   visibility = "private"
 
   template {
-    owner      = "cis188"
+    owner      = "cis1880"
     repository = var.hw
   }
 }

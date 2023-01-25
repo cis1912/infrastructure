@@ -18,7 +18,7 @@ provider "kubernetes" {
 }
 
 provider "github" {
-  organization = "cis188"
+  organization = "cis1880"
 }
 
 terraform {
