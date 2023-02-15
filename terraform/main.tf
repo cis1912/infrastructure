@@ -3,7 +3,7 @@ locals {
   published = {
     hw0           = true
     hw1           = true
-    hw2           = false
+    hw2           = true 
     hw3           = false
     hw4           = false
     final_project = false
