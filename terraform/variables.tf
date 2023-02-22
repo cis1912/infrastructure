@@ -27,3 +27,8 @@ variable "GF_GH_CLIENT_SECRET" {
   type        = string
   description = "GitHub Client Secret for the CIS1880 Grafana OAuth2 Application"
 }
+
+variable "emails" {
+  type        = map(any)
+  description = "Pennkey to email map"
+}
