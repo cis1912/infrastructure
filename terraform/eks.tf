@@ -6,7 +6,7 @@ module "eks" {
   subnets          = module.vpc.private_subnets
   vpc_id           = module.vpc.vpc_id
   write_kubeconfig = false
-  enable_irsa      = true
+  enable_irsa      = false
   map_roles = concat([
     for student, _ in var.students : {
       rolearn = module.aws_accounts[student].role-arn, username = student, groups = []
@@ -85,46 +85,46 @@ data "aws_iam_policy_document" "view-k8s" {
   }
 }
 
-resource "helm_release" "registry-creds" {
-  name       = "registry-creds"
-  repository = "https://helm.pennlabs.org"
-  chart      = "helm-wrapper"
-  version    = "0.1.0"
+# resource "helm_release" "registry-creds" {
+#   name       = "registry-creds"
+#   repository = "https://helm.pennlabs.org"
+#   chart      = "helm-wrapper"
+#   version    = "0.1.0"
 
-  values = [file("helm/registry-creds.yaml")]
-}
+#   values = [file("helm/registry-creds.yaml")]
+# }
 
-resource "kubernetes_secret" "cluster-pull-secret" {
-  metadata {
-    name      = "registry-creds-secret"
-    namespace = "kube-system"
-  }
+# resource "kubernetes_secret" "cluster-pull-secret" {
+#   metadata {
+#     name      = "registry-creds-secret"
+#     namespace = "kube-system"
+#   }
 
-  data = {
-    ".dockerconfigjson" = <<DOCKER
-{
-  "auths": {
-    "https://ghcr.io": {
-      "auth": "${base64encode("cis188bot:${var.image_pull_pat}")}"
-    }
-  }
-}
-DOCKER
-  }
+#   data = {
+#     ".dockerconfigjson" = <<DOCKER
+# {
+#   "auths": {
+#     "https://ghcr.io": {
+#       "auth": "${base64encode("cis188bot:${var.image_pull_pat}")}"
+#     }
+#   }
+# }
+# DOCKER
+#   }
 
-  type = "kubernetes.io/dockerconfigjson"
-}
+#   type = "kubernetes.io/dockerconfigjson"
+# }
 
-resource "helm_release" "cluster-pull-secret" {
-  name       = "cluster-pull-secret"
-  repository = "https://helm.pennlabs.org"
-  chart      = "helm-wrapper"
-  version    = "0.1.0"
-  namespace  = "kube-system"
+# resource "helm_release" "cluster-pull-secret" {
+#   name       = "cluster-pull-secret"
+#   repository = "https://helm.pennlabs.org"
+#   chart      = "helm-wrapper"
+#   version    = "0.1.0"
+#   namespace  = "kube-system"
 
-  values = [file("helm/cluster-pull-secret.yaml")]
-  depends_on = [
-    helm_release.registry-creds,
-    kubernetes_secret.cluster-pull-secret
-  ]
-}
+#   values = [file("helm/cluster-pull-secret.yaml")]
+#   depends_on = [
+#     helm_release.registry-creds,
+#     kubernetes_secret.cluster-pull-secret
+#   ]
+# }

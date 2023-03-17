@@ -1,13 +1,13 @@
 data "aws_caller_identity" "current" {}
 
 // User
-resource "aws_iam_user" "user" {
-  name = var.pennkey
+# resource "aws_iam_user" "user" {
+#   name = var.emails[var.pennkey]
 
-  tags = {
-    created-by = "terraform"
-  }
-}
+#   tags = {
+#     created-by = "terraform"
+#   }
+# }
 
 // Policy to allow user to assume any role
 data "aws_iam_policy_document" "assume-role-policy" {
@@ -20,13 +20,13 @@ data "aws_iam_policy_document" "assume-role-policy" {
 // Allow user to assume roles
 resource "aws_iam_user_policy" "policy" {
   name   = "assume-role"
-  user   = aws_iam_user.user.name
+  user   = var.emails[var.pennkey]
   policy = data.aws_iam_policy_document.assume-role-policy.json
 }
 
 resource "aws_iam_user_policy" "describe-cluster" {
   name   = "eks"
-  user   = aws_iam_user.user.name
+  user   = var.emails[var.pennkey]
   policy = var.view_cluster
 }
 
@@ -37,7 +37,7 @@ data "aws_iam_policy_document" "allow-user-assume-role" {
 
     principals {
       type        = "AWS"
-      identifiers = [aws_iam_user.user.arn]
+      identifiers = [format("arn:aws:iam::751852120204:user/%s", var.emails[var.pennkey])]
     }
   }
   statement {
@@ -72,7 +72,7 @@ data "aws_iam_policy_document" "manage-user" {
       "iam:ListAccessKeys",
       "iam:UpdateAccessKey"
     ]
-    resources = [aws_iam_user.user.arn]
+    resources = [format("arn:aws:iam::751852120204:user/%s", var.emails[var.pennkey])]
   }
 }
 
