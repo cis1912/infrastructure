@@ -1,13 +1,12 @@
 module "eks" {
   source           = "terraform-aws-modules/eks/aws"
-  version          = "15.0.0"
+  version          = "~> 19.0"
   cluster_name     = local.k8s_cluster_name
   cluster_version  = "1.23"
-  subnets          = module.vpc.private_subnets
+  subnet_ids       = module.vpc.private_subnets
   vpc_id           = module.vpc.vpc_id
-  write_kubeconfig = false
   enable_irsa      = true
-  map_roles = concat([
+  aws_auth_roles = concat([
     for student, _ in var.students : {
       rolearn = module.aws_accounts[student].role-arn, username = student, groups = []
     }
@@ -18,19 +17,26 @@ module "eks" {
       }
     ]
   )
-  worker_groups_launch_template = [
-    {
+  self_managed_node_groups = {
+    worker_group = {
+      public_ip               = true
       name                    = "spot-1"
-      override_instance_types = ["t3.medium"]
-      spot_instance_pools     = 1
-      // TODO: change to whatever size is needed
-      asg_max_size         = 2
-      asg_desired_capacity = 2
-      kubelet_extra_args   = "--node-labels=node.kubernetes.io/lifecycle=spot"
-      bootstrap_extra_args = "--use-max-pods false"
-      public_ip            = true
-    },
-  ]
+      min_size                = 1
+      max_size                = 2
+      desired_size            = 2
+      instance_type           = "t3.medium"
+      bootstrap_extra_args    = "--node-labels=node.kubernetes.io/lifecycle=spot --use-max-pods false"
+      use_mixed_instances_policy = true
+      mixed_instances_policy = {
+        instances_distribution = {
+          spot_instance_pools = 4
+        }
+        override = [
+          { instance_type = "t3.medium" },
+        ]
+      }
+    }
+  }
   tags = {
     created-by = "terraform"
   }

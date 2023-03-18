@@ -62,14 +62,14 @@ resource "helm_release" "certs" {
   ]
 }
 
-resource "helm_release" "cert-grafana" {
-  name       = "cert-grafana"
-  repository = "https://helm.pennlabs.org"
-  chart      = "helm-wrapper"
-  version    = "0.1.0"
-  values     = [templatefile("cert-manager-files/cert.yaml", { NAME = "grafana" })]
+# resource "helm_release" "cert-grafana" {
+#   name       = "cert-grafana"
+#   repository = "https://helm.pennlabs.org"
+#   chart      = "helm-wrapper"
+#   version    = "0.1.0"
+#   values     = [templatefile("cert-manager-files/cert.yaml", { NAME = "grafana" })]
 
-  depends_on = [
-    time_sleep.cert-manager-cr
-  ]
-}
+#   depends_on = [
+#     time_sleep.cert-manager-cr
+#   ]
+# }
