@@ -1,10 +1,10 @@
 locals {
   // Name of the homework mapped to published status
   published = {
-    hw0           = true
-    hw1           = true
-    hw2           = true 
-    hw3           = true
+    hw0           = false
+    hw1           = false
+    hw2           = false
+    hw3           = false
     hw4           = false
     final_project = false
   }
@@ -19,4 +19,5 @@ locals {
   bot_user         = "cis188bot"
   k8s_cluster_name = "cis188"
   users            = merge(var.students, var.instructors, var.tas)
+  emails           = var.emails
 }

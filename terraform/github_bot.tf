@@ -3,6 +3,7 @@ resource "github_membership" "bot" {
   username = local.bot_user
   role     = "admin"
 
+  # TODO: may not be possible
   lifecycle {
     prevent_destroy = true
   }
@@ -23,7 +24,7 @@ resource "github_repository" "hw" {
 
 // Grant bot user push access to hw repos
 resource "github_team" "bot" {
-  name        = "bot"
+  name        = "cis1912-bot"
   description = "Bot team"
   privacy     = "closed"
 

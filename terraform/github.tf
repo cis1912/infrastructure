@@ -23,7 +23,10 @@ resource "github_membership" "org_membership" {
 module "hws" {
   // Terraform doesn't allow for_each over objects, so we must translate our hws object into a map
   // Taken from https://www.terraform.io/docs/configuration/functions/flatten.html#flattening-nested-structures-for-for_each
-  for_each    = { for hw in local.hws : "${hw.hw}-${hw.student}" => hw }
+  for_each = {
+    for hw in local.hws : "${hw.hw}-${hw.student}" => hw
+    if hw != "hw0" && hw != "hw1" && hw != "hw2"
+  }
   source      = "./modules/hw_repo"
   hw          = each.value.hw
   pennkey     = each.value.student
