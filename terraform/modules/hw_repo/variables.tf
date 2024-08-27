@@ -15,7 +15,7 @@ variable "team-id" {
 
 variable "bot-team-id" {
   type        = string
-  description = "ID of the CIS 188 bot team."
+  description = "ID of the CIS 1912 bot team."
 }
 
 variable "published" {

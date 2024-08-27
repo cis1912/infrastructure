@@ -1,6 +1,6 @@
 # infrastructure
 
-This repo contains the underlying infrastructure of CIS 188. Feel free to poke around! If you want to learn more about how anything is configured just ask.
+This repo contains the underlying infrastructure of CIS 1912. Feel free to poke around! If you want to learn more about how anything is configured just ask.
 
 ## Beginning of semester configuration
 
