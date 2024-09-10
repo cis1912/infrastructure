@@ -25,12 +25,12 @@ variable "GH_TOKEN" {
 
 variable "GF_GH_CLIENT_ID" {
   type        = string
-  description = "GitHub Client ID for the cis1912 Grafana OAuth2 Application"
+  description = "GitHub Client ID for the CIS1912 Grafana OAuth2 Application"
 }
 
 variable "GF_GH_CLIENT_SECRET" {
   type        = string
-  description = "GitHub Client Secret for the cis1912 Grafana OAuth2 Application"
+  description = "GitHub Client Secret for the CIS1912 Grafana OAuth2 Application"
 }
 
 variable "emails" {

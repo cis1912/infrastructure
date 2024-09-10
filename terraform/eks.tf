@@ -106,17 +106,17 @@
 #     namespace = "kube-system"
 #   }
 
-#   data = {
-#     ".dockerconfigjson" = <<DOCKER
+# data = {
+#   ".dockerconfigjson" = <<DOCKER
 # {
 #   "auths": {
 #     "https://ghcr.io": {
-#       "auth": "${base64encode("cis188bot:${var.image_pull_pat}")}"
+#       "auth": "${base64encode("cis1912bot:${var.image_pull_pat}")}"
 #     }
 #   }
 # }
 # DOCKER
-#   }
+# }
 
 #   type = "kubernetes.io/dockerconfigjson"
 # }
