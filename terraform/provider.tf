@@ -20,7 +20,6 @@ provider "helm" {
 # }
 
 provider "github" {
-  owner = "cis1880"
 }
 
 terraform {
@@ -39,7 +38,7 @@ terraform {
     # }
     github = {
       source  = "integrations/github"
-      version = "~> 6.0"
+      version = "~> 6.2.3"
     }
   }
 }

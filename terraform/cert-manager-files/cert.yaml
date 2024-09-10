@@ -1,11 +1,11 @@
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: ${NAME}-cis1880-org
+  name: ${NAME}-cis1912-org
 spec:
-  secretName: ${NAME}-cis1880-org-tls
+  secretName: ${NAME}-cis1912-org-tls
   dnsNames:
-    - "${NAME}.cis1880.org"
+    - "${NAME}.cis1912.org"
   issuerRef:
     name: letsencrypt-prod
     kind: ClusterIssuer

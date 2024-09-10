@@ -27,10 +27,11 @@ module "hws" {
     for hw in local.hws : "${hw.hw}-${hw.student}" => hw
     if hw != "hw0" && hw != "hw1" && hw != "hw2"
   }
-  source      = "./modules/hw_repo"
-  hw          = each.value.hw
-  pennkey     = each.value.student
-  team-id     = github_team.teams[each.value.student].id
-  bot-team-id = github_team.bot.id
-  published   = each.value.published
+  source          = "./modules/hw_repo"
+  hw              = each.value.hw
+  pennkey         = each.value.student
+  github-username = local.users[each.value.student]
+  team-id         = github_team.teams[each.value.student].id
+  bot-team-id     = github_team.bot.id
+  published       = each.value.published
 }

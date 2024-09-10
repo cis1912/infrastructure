@@ -18,14 +18,19 @@ variable "image_pull_pat" {
   description = "PAT of GH User to pull gcr images"
 }
 
+variable "GH_TOKEN" {
+  type        = string
+  description = "GitHub Token for the cis1912 GitHub Application"
+}
+
 variable "GF_GH_CLIENT_ID" {
   type        = string
-  description = "GitHub Client ID for the CIS1880 Grafana OAuth2 Application"
+  description = "GitHub Client ID for the cis1912 Grafana OAuth2 Application"
 }
 
 variable "GF_GH_CLIENT_SECRET" {
   type        = string
-  description = "GitHub Client Secret for the CIS1880 Grafana OAuth2 Application"
+  description = "GitHub Client Secret for the cis1912 Grafana OAuth2 Application"
 }
 
 variable "emails" {
