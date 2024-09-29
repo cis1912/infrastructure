@@ -2,7 +2,7 @@ locals {
   // Name of the homework mapped to published status
   published = {
     hw0           = true
-    hw1           = false
+    hw1           = true
     hw2           = false
     hw3           = false
     hw4           = false
