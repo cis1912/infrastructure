@@ -9,16 +9,22 @@ resource "github_repository" "hw" {
   }
 }
 
-resource "github_team_repository" "hw" {
+resource "github_repository_collaborators" "hw" {
   count      = var.published ? 1 : 0
-  team_id    = var.team-id
   repository = github_repository.hw[0].name
-  permission = var.hw != "hw4" ? "push" : "admin"
-}
 
-resource "github_team_repository" "bot" {
-  count      = var.published ? 1 : 0
-  team_id    = var.bot-team-id
-  repository = github_repository.hw[0].name
-  permission = "admin"
+  user {
+    permission = "admin"
+    username   = "cis1912bot"
+  }
+
+  team {
+    permission = var.hw != "hw4" ? "push" : "admin"
+    team_id    = var.team-id
+  }
+
+  user {
+    permission = "push"
+    username   = var.github-username
+  }
 }

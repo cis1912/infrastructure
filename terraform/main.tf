@@ -19,4 +19,5 @@ locals {
   bot_user         = "cis1912bot"
   k8s_cluster_name = "cis1912"
   users            = merge(var.students, var.instructors, var.tas)
+  emails           = var.emails
 }

@@ -3,6 +3,11 @@ variable "pennkey" {
   description = "Pennkey of student"
 }
 
+variable "github-username" {
+  type        = string
+  description = "GitHub username of student"
+}
+
 variable "hw" {
   type        = string
   description = "Homework to create repo of (Ex. hw0)."

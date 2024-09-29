@@ -1,8 +1,18 @@
-// Configure all aws accounts
-module "aws_accounts" {
-  for_each     = local.users
-  source       = "./modules/aws_account"
-  pennkey      = each.key
-  emails       = local.emails
-  view_cluster = data.aws_iam_policy_document.view-k8s.json
+# module "s3_bucket" {
+#   source = "terraform-aws-modules/s3-bucket/aws"
+
+#   bucket = "cis1912-test"
+#   acl    = "private"
+
+#   control_object_ownership = true
+#   object_ownership         = "ObjectWriter"
+# }
+
+resource "aws_s3_bucket" "example" {
+  bucket = "cis1912-test-bucket"
+
+  tags = {
+    Name        = "CIS 1912 Test Bucket"
+    Environment = "Dev"
+  }
 }

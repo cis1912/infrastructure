@@ -3,6 +3,7 @@ resource "github_membership" "bot" {
   username = local.bot_user
   role     = "admin"
 
+  # TODO: may not be possible
   lifecycle {
     prevent_destroy = true
   }
@@ -19,11 +20,16 @@ resource "github_repository" "hw" {
   lifecycle {
     prevent_destroy = true
   }
+
+  template {
+    repository = each.key
+    owner      = "cis1912"
+  }
 }
 
 // Grant bot user push access to hw repos
 resource "github_team" "bot" {
-  name        = "bot"
+  name        = "cis1912-bot"
   description = "Bot team"
   privacy     = "closed"
 
@@ -42,11 +48,21 @@ resource "github_team_membership" "bot" {
   }
 }
 
-resource "github_team_repository" "bot" {
-  for_each   = local.published
-  team_id    = github_team.bot.id
+resource "github_repository_collaborators" "bot" {
+  for_each = local.published
+
   repository = each.key
-  permission = "push"
+
+  user {
+    permission = "admin"
+    username   = local.bot_user
+  }
+
+  team {
+    permission = "push"
+    team_id    = github_team.bot.id
+  }
+
 
   lifecycle {
     prevent_destroy = true
